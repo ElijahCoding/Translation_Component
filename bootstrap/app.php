@@ -22,7 +22,7 @@ $app = new Slim\App([
 
         'translations' => [
           'path' => __DIR__ . '/../lang',
-          'fallback' => 'en'
+          'fallback' => 'de'
         ]
     ],
 ]);
@@ -49,7 +49,7 @@ $container['view'] = function ($container) {
 
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
-
+    $view->addExtension(new App\Views\Extensions\TranslationExtension($container['translator']));
     return $view;
 };
 
